@@ -35,6 +35,13 @@ describe('Employees (e2e)', () => {
         expect(res.body.fullName).toBe('John Doe');
     });
 
+    it('should return all employees', async () => {
+        const res = await request(app.getHttpServer()).get('/employees');
+
+        expect(res.status).toBe(200);
+        expect(Array.isArray(res.body)).toBe(true);
+    });
+
     afterAll(async () => {
         if (app) {
             await app.close();
