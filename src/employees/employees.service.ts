@@ -11,11 +11,12 @@ export class EmployeesService {
     ) { }
 
     async create(data: Partial<Employee>) {
-        const emp = this.repo.create(data);
-        return this.repo.save(emp);
+        const emp = await this.repo.create(data);
+        return await this.repo.save(emp);
     }
 
     async findAll() {
+        return this.repo.find();
     }
 
     async findOne(id: number) {
