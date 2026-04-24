@@ -11,6 +11,8 @@ export class EmployeesService {
     ) { }
 
     async create(data: Partial<Employee>) {
+        const emp = this.repo.create(data);
+        return this.repo.save(emp);
     }
 
     async findAll() {

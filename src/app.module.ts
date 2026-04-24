@@ -7,7 +7,8 @@ import { EmployeesModule } from './employees/employees.module';
   imports: [
     TypeOrmModule.forRoot({
       type: 'sqlite',
-      database: 'db.sqlite',
+      database: process.env.NODE_ENV === 'test' ? ':memory:' : 'db.sqlite',
+      dropSchema: process.env.NODE_ENV === 'test',
       entities: [Employee],
       synchronize: true,
     }),
