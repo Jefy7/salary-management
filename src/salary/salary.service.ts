@@ -8,10 +8,7 @@ export class SalaryService {
     async calculate(id: number) {
         const emp = await this.employeeService.findOne(id);
 
-        let rate = 0;
-        if (emp.country === 'India') rate = 0.1;
-        else if (emp.country === 'United States') rate = 0.12;
-
+        let rate = this.getRate(emp.country)
         const deduction = emp.salary * rate;
 
         return {
@@ -19,6 +16,14 @@ export class SalaryService {
             deduction,
             net: emp.salary - deduction,
         };
+    }
+
+
+    private getRate(country: string): number {
+        let rate = 0;
+        if (country === 'India') rate = 0.1;
+        else if (country === 'United States') rate = 0.12;
+        return rate;
     }
 
 }
