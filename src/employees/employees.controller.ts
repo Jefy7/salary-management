@@ -28,7 +28,11 @@ export class EmployeesController {
     }
 
     @Delete(':id')
-    remove(@Param('id') id: string) {
-        return this.service.remove(Number(id));
+    async remove(@Param('id') id: string) {
+        const emp = await this.service.remove(Number(id));
+        return {
+            message: 'Resource deleted successfully',
+            data: emp.id,
+        };
     }
 }
