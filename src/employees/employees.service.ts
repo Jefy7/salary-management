@@ -31,5 +31,7 @@ export class EmployeesService {
     }
 
     async remove(id: number) {
+        const emp = await this.findOne(id);
+        return this.repo.remove(emp);
     }
 }
