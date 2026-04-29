@@ -60,6 +60,25 @@ describe('Employees (e2e)', () => {
         expect(res.body.id).toBe(id);
     });
 
+    it('should update employee salary', async () => {
+        const create = await request(app.getHttpServer())
+            .post('/employees')
+            .send({
+                fullName: 'Bob',
+                jobTitle: 'Dev',
+                country: 'India',
+                salary: 40000,
+            });
+
+        const id = create.body.id;
+
+        const res = await request(app.getHttpServer())
+            .put(`/employees/${id}`)
+            .send({ salary: 45000 });
+
+        expect(res.body.salary).toBe(45000);
+    });
+
     afterAll(async () => {
         if (app) {
             await app.close();
