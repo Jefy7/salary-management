@@ -74,6 +74,13 @@
     "testEnvironment": "node",
     "moduleNameMapper": {
       "^src/(.*)$": "<rootDir>/../src/$1"
-    }
+    },
+    "coveragePathIgnorePatterns": [
+      "/node_modules/",
+      "main.ts",
+      "app.module.ts",
+      "employees.module.ts",
+      "salary.module.ts"
+    ]
   }
 }
