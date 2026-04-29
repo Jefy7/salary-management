@@ -37,6 +37,13 @@ describe('Salary (e2e)', () => {
         expect(res.body.net).toBe(45000);
     });
 
+    it('should return salary stats by country', async () => {
+        const res = await request(app.getHttpServer())
+            .get('/salary/metrics/country/India');
+
+        expect(res.body.min).toBeDefined();
+    });
+
     afterAll(async () => {
         if (app) {
             await app.close();
