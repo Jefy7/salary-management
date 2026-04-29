@@ -15,8 +15,8 @@ export class EmployeesService {
         return await this.repo.save(emp);
     }
 
-    async findAll() {
-        return this.repo.find();
+    async findAll(): Promise<Employee[]> {
+        return await this.repo.find();
     }
 
     async findOne(id: number) {
