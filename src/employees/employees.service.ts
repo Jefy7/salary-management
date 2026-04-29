@@ -34,4 +34,14 @@ export class EmployeesService {
         const emp = await this.findOne(id);
         return this.repo.remove(emp);
     }
+
+    async byCountry(country: string) {
+        return this.repo
+            .createQueryBuilder('e')
+            .select('MIN(e.salary)', 'min')
+            .addSelect('MAX(e.salary)', 'max')
+            .addSelect('AVG(e.salary)', 'avg')
+            .where('e.country = :country', { country })
+            .getRawOne();
+    }
 }
