@@ -36,12 +36,18 @@ export class EmployeesService {
     }
 
     async byCountry(country: string) {
-        return this.repo
+        const result = await this.repo
             .createQueryBuilder('e')
             .select('MIN(e.salary)', 'min')
             .addSelect('MAX(e.salary)', 'max')
             .addSelect('AVG(e.salary)', 'avg')
             .where('e.country = :country', { country })
             .getRawOne();
+
+        return {
+            min: result?.min ? Number(result.min) : 0,
+            max: result?.max ? Number(result.max) : 0,
+            avg: result?.avg ? Number(result.avg) : 0,
+        };
     }
 }
