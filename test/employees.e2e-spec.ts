@@ -79,6 +79,25 @@ describe('Employees (e2e)', () => {
         expect(res.body.salary).toBe(45000);
     });
 
+    it('should delete employee', async () => {
+        const create = await request(app.getHttpServer())
+            .post('/employees')
+            .send({
+                fullName: 'Temp',
+                jobTitle: 'QA',
+                country: 'India',
+                salary: 30000,
+            });
+
+        const id = create.body.id;
+
+        await request(app.getHttpServer()).delete(`/employees/${id}`);
+
+        const res = await request(app.getHttpServer()).get(`/employees/${id}`);
+
+        expect(res.status).toBe(404);
+    });
+
     afterAll(async () => {
         if (app) {
             await app.close();
