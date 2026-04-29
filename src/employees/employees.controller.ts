@@ -1,6 +1,7 @@
 import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
 import { EmployeesService } from './employees.service';
 import { CreateEmployeeDto } from './dto/createEmployee.dto';
+import { UpdateEmployeeDto } from './dto/updateEmployee.dto';
 
 @Controller('employees')
 export class EmployeesController {
@@ -22,7 +23,7 @@ export class EmployeesController {
     }
 
     @Put(':id')
-    async update(@Param('id') id: string, @Body() body) {
+    async update(@Param('id') id: string, @Body() body: UpdateEmployeeDto) {
         return await this.service.update(Number(id), body);
     }
 }
