@@ -26,6 +26,8 @@ export class EmployeesService {
     }
 
     async update(id: number, data: Partial<Employee>) {
+        await await this.repo.update(id, data);
+        return this.findOne(id);
     }
 
     async remove(id: number) {
