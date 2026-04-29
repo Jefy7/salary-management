@@ -7,17 +7,17 @@ export class EmployeesController {
     constructor(protected readonly service: EmployeesService) { }
 
     @Post()
-    create(@Body() body: CreateEmployeeDto) {
-        return this.service.create(body);
+    async create(@Body() body: CreateEmployeeDto) {
+        return await this.service.create(body);
     }
 
     @Get()
-    findAll() {
-        return this.service.findAll();
+    async findAll() {
+        return await this.service.findAll();
     }
 
     @Get(':id')
-    findOne(@Param('id') id: string) {
-        return this.service.findOne(Number(id));
+    async findOne(@Param('id') id: string) {
+        return await this.service.findOne(Number(id));
     }
 }

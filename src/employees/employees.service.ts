@@ -19,8 +19,10 @@ export class EmployeesService {
         return await this.repo.find();
     }
 
-    async findOne(id: number) {
-        return this.repo.findOneBy({ id });
+    async findOne(id: number): Promise<Employee> {
+        const emp = await this.repo.findOneBy({ id });
+        if (!emp) throw new NotFoundException();
+        return emp
     }
 
     async update(id: number, data: Partial<Employee>) {
