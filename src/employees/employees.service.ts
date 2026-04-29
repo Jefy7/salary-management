@@ -20,6 +20,7 @@ export class EmployeesService {
     }
 
     async findOne(id: number) {
+        return this.repo.findOneBy({ id });
     }
 
     async update(id: number, data: Partial<Employee>) {
