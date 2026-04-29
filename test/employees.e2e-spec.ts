@@ -42,6 +42,24 @@ describe('Employees (e2e)', () => {
         expect(Array.isArray(res.body)).toBe(true);
     });
 
+    it('should return employee by id', async () => {
+        const create = await request(app.getHttpServer())
+            .post('/employees')
+            .send({
+                fullName: 'Alice',
+                jobTitle: 'Manager',
+                country: 'India',
+                salary: 60000,
+            });
+
+        const id = create.body.id;
+
+        const res = await request(app.getHttpServer()).get(`/employees/${id}`);
+
+        expect(res.status).toBe(200);
+        expect(res.body.id).toBe(id);
+    });
+
     afterAll(async () => {
         if (app) {
             await app.close();
